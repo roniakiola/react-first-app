@@ -1,5 +1,6 @@
 {
   "name": "my-app",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -36,7 +37,6 @@
     ]
   },
   "devDependencies": {
-    "homepage": ".",
     "eslint": "^8.11.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
