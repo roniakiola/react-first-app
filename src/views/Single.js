@@ -1,6 +1,6 @@
 import {useLocation} from 'react-router-dom';
+import {mediaUrl} from '../utils/variables';
 
-const url = 'https://media.mw.metropolia.fi/wbma/uploads/';
 const Single = () => {
   const location = useLocation();
   console.log(location);
@@ -9,7 +9,7 @@ const Single = () => {
   return (
     <>
       <h1>{file.title}</h1>
-      <img src={url + file.filename} alt={file.title} />
+      <img src={mediaUrl + file.filename} alt={file.title} />
     </>
   );
 };
