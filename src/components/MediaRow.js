@@ -1,29 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
-const url = 'http://media.mw.metropolia.fi/wbma/uploads/';
+const url = 'https://media.mw.metropolia.fi/wbma/uploads/';
 
-const MediaRow = ({item}) => {
+const MediaRow = ({file}) => {
   return (
     <tr>
-      <td className="container">
-        <div>
-          <img src={url + item.thumbnails.w160} alt={item.title} />
-        </div>
-        <div>
-          <h1>{item.title}</h1>
-          <p>{item.description}</p>
-        </div>
-        <div className="link">
-          <a href={item.filename}>view</a>
-        </div>
+      <td>
+        <img src={url + file.thumbnails.w160} alt={file.title} />
+      </td>
+      <td>
+        <h4>{file.title}</h4>
+        <p>{file.description}</p>
+      </td>
+      <td>
+        <Link to={'/single'} state={{file}}>
+          View
+        </Link>
       </td>
     </tr>
   );
 };
 
 MediaRow.propTypes = {
-  item: PropTypes.object,
+  file: PropTypes.object,
 };
 
 export default MediaRow;
