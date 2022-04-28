@@ -2,13 +2,21 @@
 import {useEffect, useState} from 'react';
 import MediaRow from './MediaRow';
 
+const url = 'https://media.mw.metropolia.fi/wbma/media/';
+
 const MediaTable = () => {
   const [mediaArray, setMediaArray] = useState([]);
   const getMedia = async () => {
     try {
-      const response = await fetch('test.json');
+      const response = await fetch(url);
       const json = await response.json();
-      setMediaArray(json);
+      const allFiles = await Promise.all(
+        json.map(async (item) => {
+          const fileResponse = await fetch(url + item.file_id);
+          return await fileResponse.json();
+        })
+      );
+      setMediaArray(allFiles);
     } catch (err) {
       alert(err.message);
     }
@@ -18,7 +26,6 @@ const MediaTable = () => {
     getMedia();
   }, []);
 
-  console.log(mediaArray);
   return (
     <table>
       <tbody>
