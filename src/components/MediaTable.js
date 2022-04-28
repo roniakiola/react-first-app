@@ -1,22 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
+// import PropTypes from 'prop-types';
+import {useEffect, useState} from 'react';
 import MediaRow from './MediaRow';
 
-const MediaTable = ({items}) => {
+const MediaTable = () => {
+  const [mediaArray, setMediaArray] = useState([]);
+  const getMedia = async () => {
+    try {
+      const response = await fetch('test.json');
+      const json = await response.json();
+      setMediaArray(json);
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getMedia();
+  }, []);
+
+  console.log(mediaArray);
   return (
-    <table className="media-table">
+    <table>
       <tbody>
-        {items.map((item, index) => (
-          <MediaRow key={index} item={item} />
-        ))}
+        {mediaArray.map((item, index) => {
+          return <MediaRow key={index} item={item} />;
+        })}
       </tbody>
     </table>
   );
 };
 
-MediaTable.propTypes = {
-  items: PropTypes.array,
-};
+MediaTable.propTypes = {};
 
 export default MediaTable;
