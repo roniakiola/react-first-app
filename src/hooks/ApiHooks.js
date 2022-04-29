@@ -1,3 +1,4 @@
+// TODO: add necessary imports
 import {useEffect, useState} from 'react';
 import {baseUrl} from '../utils/variables';
 
@@ -51,11 +52,7 @@ const useUser = () => {
 
   const getUsername = async (username) => {
     const checkUser = await fetchJson(baseUrl + 'users/username/' + username);
-    if (checkUser.available) {
-      return true;
-    } else {
-      throw new Error('Username not available');
-    }
+    return checkUser.available;
   };
 
   const postUser = async (inputs) => {
